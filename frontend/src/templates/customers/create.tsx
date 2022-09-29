@@ -33,13 +33,7 @@ export default function CreateUserTemplate() {
       <Flex w="100%" maxWidth={1480} mx="auto" my="6" px={["2", "6"]}>
         <Sidebar />
 
-        <Box
-          as="form"
-          flex="1"
-          bgColor="gray.800"
-          padding={["6", "8"]}
-          borderRadius={8}
-        >
+        <Box flex="1" bgColor="gray.800" padding={["6", "8"]} borderRadius={8}>
           <Heading size="lg" fontWeight="normal">
             Criar clientes
           </Heading>
@@ -52,11 +46,11 @@ export default function CreateUserTemplate() {
 
               <Flex mt={["6", "8"]} justifyContent="flex-end">
                 <HStack spacing="4">
-                  {/* <Link href="/customers" passHref>
+                  <Link href="/customers" passHref>
                     <Button as="a" colorScheme="whiteAlpha">
                       Cancelar
                     </Button>
-                  </Link> */}
+                  </Link>
                   <Button
                     type="submit"
                     colorScheme="blue"
