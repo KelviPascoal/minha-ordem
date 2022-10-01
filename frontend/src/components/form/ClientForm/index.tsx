@@ -1,21 +1,7 @@
-import {
-  Flex,
-  VStack,
-  SimpleGrid,
-  HStack,
-  Button,
-  Box,
-} from "@chakra-ui/react";
-import Link from "next/link";
+import { VStack, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
-import {
-  Controller,
-  ControllerFieldState,
-  ControllerRenderProps,
-  FieldValues,
-  useFormContext,
-  UseFormStateReturn,
-} from "react-hook-form";
+import { useFormContext } from "react-hook-form";
+import { getCEP } from "../../../services/getCEP";
 import { Input } from "../Input";
 
 export type UserCreateFormData = {
@@ -38,6 +24,19 @@ export type ClientFormProps = {
 export function ClientForm({ initialValues, isFormDisabled }: ClientFormProps) {
   const { register, setValue, formState } = useFormContext();
 
+  const loadCEP = async (cep: string) => {
+    const address = await getCEP(cep);
+
+    if (!!address) {
+      console.log("addressaddress", address);
+
+      setValue("address", address?.address);
+      setValue("district", address?.district);
+      setValue("city", address?.city);
+      setValue("uf", address?.uf);
+    }
+  };
+
   React.useEffect(() => {
     if (!!initialValues) {
       setValue("name", initialValues.name);
@@ -50,7 +49,7 @@ export function ClientForm({ initialValues, isFormDisabled }: ClientFormProps) {
       setValue("city", initialValues.city);
       setValue("uf", initialValues.uf);
     }
-  }, [initialValues]);
+  }, [initialValues, setValue]);
 
   const isDisabled = isFormDisabled || formState.isSubmitting;
 
@@ -61,6 +60,7 @@ export function ClientForm({ initialValues, isFormDisabled }: ClientFormProps) {
           label="Nome"
           {...register("name")}
           isInvalid={!!formState.errors?.name}
+          errorMessage={formState.errors?.name?.message?.toString()}
           isDisabled={isDisabled}
         />
 
@@ -68,6 +68,7 @@ export function ClientForm({ initialValues, isFormDisabled }: ClientFormProps) {
           label="E-mail"
           {...register("email")}
           isInvalid={!!formState.errors.email}
+          errorMessage={formState.errors?.email?.message?.toString()}
           isDisabled={isDisabled}
         />
       </SimpleGrid>
@@ -77,12 +78,14 @@ export function ClientForm({ initialValues, isFormDisabled }: ClientFormProps) {
           label="Telefone"
           {...register("phoneNumber")}
           isInvalid={!!formState.errors.phoneNumber}
+          errorMessage={formState.errors?.phoneNumber?.message?.toString()}
           isDisabled={isDisabled}
         />
         <Input
-          label="Telefone 2"
+          label="Telefone de contato"
           {...register("contactPhoneNumber")}
           isInvalid={!!formState.errors.contactPhoneNumber}
+          errorMessage={formState.errors?.contactPhoneNumber?.message?.toString()}
           isDisabled={isDisabled}
         />
       </SimpleGrid>
@@ -92,7 +95,10 @@ export function ClientForm({ initialValues, isFormDisabled }: ClientFormProps) {
           label="CEP"
           {...register("cep")}
           isInvalid={!!formState.errors.cep}
+          errorMessage={formState.errors?.cep?.message?.toString()}
           isDisabled={isDisabled}
+          onChange={(e) => loadCEP(e.target.value)}
+          maxLength={8}
         />
         <div></div>
       </SimpleGrid>
@@ -102,12 +108,14 @@ export function ClientForm({ initialValues, isFormDisabled }: ClientFormProps) {
           label="Rua"
           {...register("address")}
           isInvalid={!!formState.errors.address}
+          errorMessage={formState.errors?.address?.message?.toString()}
           isDisabled={isDisabled}
         />
         <Input
           label="Bairro"
           {...register("district")}
           isInvalid={!!formState.errors.district}
+          errorMessage={formState.errors?.district?.message?.toString()}
           isDisabled={isDisabled}
         />
       </SimpleGrid>
@@ -116,12 +124,14 @@ export function ClientForm({ initialValues, isFormDisabled }: ClientFormProps) {
           label="Cidade"
           {...register("city")}
           isInvalid={!!formState.errors.city}
+          errorMessage={formState.errors?.city?.message?.toString()}
           isDisabled={isDisabled}
         />
         <Input
           label="Estado"
           {...register("uf")}
           isInvalid={!!formState.errors.uf}
+          errorMessage={formState.errors?.uf?.message?.toString()}
           isDisabled={isDisabled}
         />
       </SimpleGrid>
