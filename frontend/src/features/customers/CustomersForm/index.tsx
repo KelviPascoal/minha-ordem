@@ -2,9 +2,9 @@ import { VStack, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { getCEP } from "../../../services/getCEP";
-import { Input } from "../Input";
+import { Input } from "../../../components/form/Input";
 
-export type UserCreateFormData = {
+export type CustomersCreateFormData = {
   name: string;
   email: string;
   phoneNumber: string;
@@ -16,12 +16,15 @@ export type UserCreateFormData = {
   uf: string;
 };
 
-export type ClientFormProps = {
-  initialValues?: UserCreateFormData;
+export type CustomersFormProps = {
+  initialValues?: CustomersCreateFormData;
   isFormDisabled?: boolean;
 };
 
-export function ClientForm({ initialValues, isFormDisabled }: ClientFormProps) {
+export function CustomersForm({
+  initialValues,
+  isFormDisabled,
+}: CustomersFormProps) {
   const { register, setValue, formState } = useFormContext();
 
   const loadCEP = async (cep: string) => {
@@ -99,6 +102,7 @@ export function ClientForm({ initialValues, isFormDisabled }: ClientFormProps) {
           isDisabled={isDisabled}
           onChange={(e) => loadCEP(e.target.value)}
           maxLength={8}
+          type="number"
         />
         <div></div>
       </SimpleGrid>

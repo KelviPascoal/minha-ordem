@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
-import { Header } from "../../components/Header";
-import { Sidebar } from "../../components/Sidebar";
-import { ClientForm } from "../../components/form/ClientForm";
-import { clientSchema } from "../../components/form/ClientForm/formSchema";
+import { Header } from "../../../components/Header";
+import { Sidebar } from "../../../components/Sidebar";
+import { CustomersForm } from "../CustomersForm";
+import { clientSchema } from "../CustomersForm/formSchema";
 
 export default function CreateUserTemplate() {
   const router = useRouter();
@@ -42,7 +42,7 @@ export default function CreateUserTemplate() {
 
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(handleCreate)}>
-              <ClientForm />
+              <CustomersForm />
 
               <Flex mt={["6", "8"]} justifyContent="flex-end">
                 <HStack spacing="4">

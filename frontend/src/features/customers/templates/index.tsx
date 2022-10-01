@@ -16,37 +16,15 @@ import {
 import Link from "next/link";
 import React from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
-import { Header } from "../../components/Header";
-import { Sidebar } from "../../components/Sidebar";
+import { Header } from "../../../components/Header";
+import { Sidebar } from "../../../components/Sidebar";
+import { customersMock } from "../../../__mocks__/customers.mock";
 
-export default function UserList() {
+export default function CustomersListTemplate() {
   const isWideScreen = useBreakpointValue({
     base: false,
     lg: true,
   });
-
-  const customers = [
-    {
-      name: "Erick Pascoal",
-      phoneNumber: "erickpascoal@teste.com",
-      email: "(27) 1234-5678",
-    },
-    {
-      name: "Endeavor Santos",
-      phoneNumber: "endeavorsantos@hotmail.com",
-      email: "(27) 8765-4321",
-    },
-    {
-      name: "Dabi Pascoal",
-      phoneNumber: "dabi@teste.com",
-      email: "(27) 1234-5678",
-    },
-    {
-      name: "Natsu Moraes",
-      phoneNumber: "natsu@teste.com",
-      email: "(27) 8765-4321",
-    },
-  ];
 
   return (
     <Box>
@@ -84,7 +62,7 @@ export default function UserList() {
             </Thead>
 
             <Tbody>
-              {customers.map((customer, index) => (
+              {customersMock.map((customer, index) => (
                 <Tr key={index}>
                   <Td>
                     <Box>
