@@ -7,19 +7,18 @@ export const clientSchema = Yup.object().shape({
   contactPhoneNumber: Yup.string(),
   cep: Yup.string()
     .required()
-    .max(8)
-    .min(8)
     .test({
       test: (value, ctx) => {
         if (
-          ctx.parent.address ||
-          ctx.parent.district ||
-          ctx.parent.city ||
-          ctx.parent.uf
+          !ctx.parent.address ||
+          !ctx.parent.district ||
+          !ctx.parent.city ||
+          !ctx.parent.uf ||
+          (!!value && value.includes("_"))
         ) {
-          return true;
+          return false;
         }
-        return false;
+        return true;
       },
       message: "CEP invalido",
     }),

@@ -1,3 +1,19 @@
+// import { InputHTMLAttributes } from "react";
+import InputMask from "react-input-mask";
+
+// export function PhoneInput(props: InputHTMLAttributes<HTMLInputElement>) {
+//   return (
+//     <Input
+//       as={InputMask}
+//       mask="(99) 9.9999 9999"
+//       value={props.value}
+//       onChange={props.onChange}
+//     ></Input>
+//   );
+// }
+
+/////////////////////////////////////////////////////////////////////
+
 import {
   FormControl,
   FormErrorMessage,
@@ -11,27 +27,18 @@ type InputProps = {
   name: string;
   label?: string;
   errorMessage?: string;
-  mask?: "cep" | "phoneNumber";
 } & ChakraInputProps;
 
-import InputMask from "react-input-mask";
-
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { name, label, isInvalid, errorMessage, mask, ...restProps },
+  { name, label, isInvalid, errorMessage, ...restProps },
   ref
 ) => {
-  const masks = {
-    phoneNumber: "(99) 9 9999 9999",
-    cep: "99 999 999",
-  };
-
   return (
     <>
       <FormControl isInvalid={isInvalid}>
         {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
         <ChakraInput
-          as={!!mask ? InputMask : "input"}
-          mask={!!mask && masks[mask]}
+          as={InputMask}
           name={name}
           id={name}
           variant="filled"
@@ -50,4 +57,4 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   );
 };
 
-export const Input = forwardRef(InputBase);
+export const PhoneInput = forwardRef(InputBase);

@@ -3,7 +3,6 @@ import { api } from "./axios";
 export const getCEP = async (cep: string) => {
   if (cep.length === 8) {
     const cepResponse = await api.get(`https://viacep.com.br/ws/${cep}/json/`);
-    console.log("cepResponsecepResponsecepResponse", cepResponse);
 
     if (!cepResponse.data.error) {
       const addressData = {
