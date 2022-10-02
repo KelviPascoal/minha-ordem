@@ -25,7 +25,7 @@ export default function Home() {
 
   const { errors } = formState;
 
-  async function handleSigIn(formData: SignInFormData) {
+  async function handleSigIn(formData: Partial<SignInFormData>) {
     await new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve("");

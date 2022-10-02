@@ -11,7 +11,7 @@ type InputProps = {
   name: string;
   label?: string;
   errorMessage?: string;
-  mask?: "cep" | "phoneNumber";
+  mask?: "zipCode" | "phoneNumber";
 } & ChakraInputProps;
 
 import InputMask from "react-input-mask";
@@ -22,7 +22,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
 ) => {
   const masks = {
     phoneNumber: "(99) 9 9999 9999",
-    cep: "99 999 999",
+    zipCode: "99 999 999",
   };
 
   return (

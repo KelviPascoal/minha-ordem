@@ -21,7 +21,7 @@ export const clientSchema = Yup.object().shape({
       return true;
     },
   }),
-  cep: Yup.string()
+  zipCode: Yup.string()
     .required()
     .test({
       test: (value, ctx) => {

@@ -1,15 +1,16 @@
 import { VStack, SimpleGrid, Grid, Box } from "@chakra-ui/react";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { getCEP } from "../../../services/getCEP";
+import { getZipCode } from "../../../services/zipCode";
 import { Input } from "../../../components/form/Input";
+import { triggerAsyncId } from "async_hooks";
 
 export type CustomersCreateFormData = {
   name: string;
   email: string;
   phoneNumber: string;
   contactPhoneNumber: string;
-  cep: string;
+  zipCode: string;
   address: string;
   district: string;
   city: string;
@@ -25,22 +26,23 @@ export function CustomersForm({
   initialValues,
   isFormDisabled,
 }: CustomersFormProps) {
-  const { register, setValue, formState, watch, control } = useFormContext();
+  const { register, setValue, formState, control, trigger } = useFormContext();
 
-  const loadCEP = async (cep: string) => {
-    const correctedString = cep.split("_").join("");
-    const removedSpaces = correctedString.split(" ").join("");
-    setValue("cep", removedSpaces);
+  const loadZipCode = async (zipCode: string) => {
+    const zipWithCharactersRemoved = zipCode.split("_").join("");
+    const zipCodeWithSpacesRemoved = zipWithCharactersRemoved
+      .split(" ")
+      .join("");
+    setValue("zipCode", zipCodeWithSpacesRemoved);
 
-    console.log("correctedString", removedSpaces);
-
-    const address = await getCEP(removedSpaces);
+    const address = await getZipCode(zipCodeWithSpacesRemoved);
 
     if (!!address) {
       setValue("address", address?.address);
       setValue("district", address?.district);
       setValue("city", address?.city);
       setValue("uf", address?.uf);
+      trigger();
     }
   };
 
@@ -50,7 +52,7 @@ export function CustomersForm({
       setValue("email", initialValues.email);
       setValue("phoneNumber", initialValues.phoneNumber);
       setValue("contactPhone", initialValues.contactPhoneNumber);
-      setValue("cep", initialValues.cep);
+      setValue("zipCode", initialValues.zipCode);
       setValue("address", initialValues.address);
       setValue("district", initialValues.district);
       setValue("city", initialValues.city);
@@ -98,23 +100,23 @@ export function CustomersForm({
 
       <Controller
         control={control}
-        name="cep"
+        name="zipCode"
         render={({
           field: { onChange, value },
           formState: controllerFormState,
         }) => (
           <Input
-            label="CEP"
-            name="cep"
+            label="ZipCode"
+            name="zipCode"
             value={value}
-            isInvalid={!!controllerFormState.errors.cep}
-            errorMessage={controllerFormState.errors?.cep?.message?.toString()}
+            isInvalid={!!controllerFormState.errors.zipCode}
+            errorMessage={controllerFormState.errors?.zipCode?.message?.toString()}
             isDisabled={isDisabled}
             onChange={(e) => {
-              loadCEP(e.target.value);
+              loadZipCode(e.target.value);
               onChange(e);
             }}
-            mask="cep"
+            mask="zipCode"
           />
         )}
       />
