@@ -5,8 +5,8 @@ import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import { Header } from "../../../components/Header";
 import { Sidebar } from "../../../components/Sidebar";
-import { CustomersForm } from "../CustomersForm";
-import { clientSchema } from "../CustomersForm/formSchema";
+import { CustomersForm } from "../Form";
+import { clientSchema } from "../Form/formSchema";
 
 export default function CreateUserTemplate() {
   const router = useRouter();

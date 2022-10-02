@@ -1,4 +1,4 @@
-import { CustomersCreateFormData } from "../features/customers/CustomersForm";
+import { CustomersCreateFormData } from "../features/customers/Form";
 
 export const customersMock = [
   {

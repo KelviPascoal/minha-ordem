@@ -5,8 +5,8 @@ import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import { Header } from "../../../components/Header";
 import { Sidebar } from "../../../components/Sidebar";
-import { CustomersForm, CustomersFormProps } from "../CustomersForm";
-import { clientSchema } from "../CustomersForm/formSchema";
+import { CustomersForm, CustomersFormProps } from "../Form";
+import { clientSchema } from "../Form/formSchema";
 
 type EditUserTemplateProps = Pick<CustomersFormProps, "initialValues">;
 
