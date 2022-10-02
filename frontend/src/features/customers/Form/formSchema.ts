@@ -3,8 +3,24 @@ import { Yup } from "../../../utils/Yup";
 export const clientSchema = Yup.object().shape({
   name: Yup.string().required(),
   email: Yup.string().email().required(),
-  phoneNumber: Yup.string().required(),
-  contactPhoneNumber: Yup.string(),
+  phoneNumber: Yup.string()
+    .required()
+    .test({
+      test: (value) => {
+        if (!!value && value.includes("_")) {
+          return false;
+        }
+        return true;
+      },
+    }),
+  contactPhoneNumber: Yup.string().test({
+    test: (value) => {
+      if (!!value && value.includes("_")) {
+        return false;
+      }
+      return true;
+    },
+  }),
   cep: Yup.string()
     .required()
     .test({
