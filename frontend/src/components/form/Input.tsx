@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { forwardRef, ForwardRefRenderFunction } from "react";
 
-type InputProps = {
+export type InputProps = {
   name: string;
   label?: string;
   errorMessage?: string;
@@ -30,8 +30,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
       <FormControl isInvalid={isInvalid}>
         {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
         <ChakraInput
-          as={!!mask ? InputMask : "input"}
-          mask={!!mask && masks[mask]}
+          mask={!!mask ? masks[mask] : undefined}
           name={name}
           id={name}
           variant="filled"

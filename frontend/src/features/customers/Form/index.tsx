@@ -4,6 +4,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import { getZipCode } from "../../../services/zipCode";
 import { Input } from "../../../components/form/Input";
 import { triggerAsyncId } from "async_hooks";
+import ReactInputMask from "react-input-mask";
 
 export type CustomersCreateFormData = {
   name: string;
@@ -81,6 +82,7 @@ export function CustomersForm({
       />
 
       <Input
+        as={ReactInputMask}
         label="Telefone"
         {...register("phoneNumber")}
         isInvalid={!!formState.errors.phoneNumber}
@@ -90,6 +92,7 @@ export function CustomersForm({
       />
 
       <Input
+        as={ReactInputMask}
         label="Telefone de contato"
         {...register("contactPhoneNumber")}
         isInvalid={!!formState.errors.contactPhoneNumber}
@@ -106,6 +109,7 @@ export function CustomersForm({
           formState: controllerFormState,
         }) => (
           <Input
+            as={ReactInputMask}
             label="ZipCode"
             name="zipCode"
             value={value}
