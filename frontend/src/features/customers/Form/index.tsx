@@ -1,9 +1,8 @@
-import { VStack, SimpleGrid, Grid, Box } from "@chakra-ui/react";
+import { Grid, Box } from "@chakra-ui/react";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { getZipCode } from "../../../services/zipCode";
 import { Input } from "../../../components/form/Input";
-import { triggerAsyncId } from "async_hooks";
 import ReactInputMask from "react-input-mask";
 
 export type CustomersCreateFormData = {
