@@ -8,7 +8,7 @@ import { Sidebar } from "../../../components/Sidebar";
 import { CustomersForm } from "../Form";
 import { clientSchema } from "../Form/formSchema";
 
-export default function CreateUserTemplate() {
+export function CreateCustomersTemplate() {
   const router = useRouter();
 
   const methods = useForm({

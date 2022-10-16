@@ -14,7 +14,10 @@ export const clientSchema = Yup.object().shape({
       },
     }),
   contactPhoneNumber: Yup.string().test({
-    test: (value) => {
+    test: (value, ctx) => {
+      if (value === ctx.parent.phoneNumber) {
+        return false;
+      }
       if (!!value && value.includes("_")) {
         return false;
       }

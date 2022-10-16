@@ -4,8 +4,8 @@ export const customersMock = [
   {
     id: "1",
     name: "Erick Pascoal",
-    phoneNumber: "(27) 9.9999-9999",
-    contactPhoneNumber: "",
+    phoneNumber: "27988846549",
+    contactPhoneNumber: "27998465522",
     email: "erickpascoal@teste.com",
     address: "Travessa rua antonio ataide",
     zipCode: "29107185",
@@ -16,7 +16,7 @@ export const customersMock = [
   {
     id: "2",
     name: "Kelvi Pascoal",
-    phoneNumber: "(27) 9.9999-9999",
+    phoneNumber: "27993219875",
     contactPhoneNumber: "",
     email: "Kelvi@teste.com",
     address: "Travessa rua antonio ataide",
@@ -28,7 +28,7 @@ export const customersMock = [
   {
     id: "3",
     name: "Seju Pascoal",
-    phoneNumber: "(27) 9.9999-9999",
+    phoneNumber: "27999887777",
     contactPhoneNumber: "",
     email: "seju@teste.com",
     address: "Travessa rua antonio ataide",

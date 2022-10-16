@@ -1,5 +1,5 @@
 import CustomersListTemplate from "../../features/customers/templates";
 
-export default function CustomersList() {
+export default function Customers() {
   return <CustomersListTemplate />;
 }

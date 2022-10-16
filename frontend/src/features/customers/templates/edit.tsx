@@ -5,14 +5,15 @@ import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import { Header } from "../../../components/Header";
 import { Sidebar } from "../../../components/Sidebar";
-import { CustomersForm, CustomersFormProps } from "../Form";
+import { CustomersCreateFormData, CustomersForm } from "../Form";
 import { clientSchema } from "../Form/formSchema";
+import React from "react";
+import { customersMock } from "../../../__mocks__/customers.mock";
 
-type EditUserTemplateProps = Pick<CustomersFormProps, "initialValues">;
+export function EditCustomersTemplate() {
+  const [initialValues, setInitialValues] =
+    React.useState<CustomersCreateFormData>();
 
-export default function EditUserTemplate({
-  initialValues,
-}: EditUserTemplateProps) {
   const router = useRouter();
 
   const methods = useForm({
@@ -20,20 +21,19 @@ export default function EditUserTemplate({
   });
 
   function handleCreate(formData: any) {
-    // await new Promise((resolve) => {
-    //   setTimeout(() => {
-    //     resolve("");
-    //   }, 2000);
-    // });
-    // console.log("formData", formData);
-    // router.push("/custormes");
     console.log("formData", formData);
   }
+
+  React.useEffect(() => {
+    const [customer] = customersMock.filter(
+      (item) => item.id === router.query.id
+    );
+    setInitialValues(customer);
+  }, [router.query.id]);
 
   return (
     <Box>
       <Header showSearch={false} />
-
       <Flex w="100%" maxWidth={1480} mx="auto" my="6" px={["2", "6"]}>
         <Sidebar />
 

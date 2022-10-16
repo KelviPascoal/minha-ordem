@@ -1,5 +1,5 @@
-import CreateUserTemplate from "../../features/customers/templates/create";
+import { CreateCustomersTemplate } from "../../features/customers/templates/create";
 
-export default function CreateUser() {
-  return <CreateUserTemplate />;
+export default function CreateCustomers() {
+  return <CreateCustomersTemplate />;
 }

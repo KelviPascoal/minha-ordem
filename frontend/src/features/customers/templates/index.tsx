@@ -77,14 +77,17 @@ export default function CustomersListTemplate() {
                   {isWideScreen && <Td> {customer.phoneNumber}</Td>}
                   {isWideScreen && (
                     <Td>
-                      <Button
-                        as="a"
-                        colorScheme="blue"
-                        size="sm"
-                        leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                      <Link
+                        href={{
+                          pathname: "customers/edit",
+                          query: { id: customer.id },
+                        }}
+                        // colorScheme="blue"
+                        // size="sm"
+                        // leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
                       >
                         Editar
-                      </Button>
+                      </Link>
                     </Td>
                   )}
                 </Tr>

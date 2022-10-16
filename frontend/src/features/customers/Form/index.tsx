@@ -6,10 +6,11 @@ import { Input } from "../../../components/form/Input";
 import ReactInputMask from "react-input-mask";
 
 export type CustomersCreateFormData = {
+  id?: string;
   name: string;
   email: string;
   phoneNumber: string;
-  contactPhoneNumber: string;
+  contactPhoneNumber?: string;
   zipCode: string;
   address: string;
   district: string;
@@ -51,7 +52,7 @@ export function CustomersForm({
       setValue("name", initialValues.name);
       setValue("email", initialValues.email);
       setValue("phoneNumber", initialValues.phoneNumber);
-      setValue("contactPhone", initialValues.contactPhoneNumber);
+      setValue("contactPhoneNumber", initialValues.contactPhoneNumber);
       setValue("zipCode", initialValues.zipCode);
       setValue("address", initialValues.address);
       setValue("district", initialValues.district);
@@ -80,24 +81,38 @@ export function CustomersForm({
         isDisabled={isDisabled}
       />
 
-      <Input
-        as={ReactInputMask}
-        label="Telefone"
-        {...register("phoneNumber")}
-        isInvalid={!!formState.errors.phoneNumber}
-        errorMessage={formState.errors?.phoneNumber?.message?.toString()}
-        isDisabled={isDisabled}
-        mask="phoneNumber"
+      <Controller
+        control={control}
+        name="phoneNumber"
+        render={({ field: { value }, formState: controllerFormState }) => (
+          <Input
+            as={ReactInputMask}
+            value={value}
+            label="Telefone"
+            {...register("phoneNumber")}
+            isInvalid={!!controllerFormState.errors.phoneNumber}
+            errorMessage={controllerFormState.errors?.phoneNumber?.message?.toString()}
+            isDisabled={isDisabled}
+            mask="phoneNumber"
+          />
+        )}
       />
 
-      <Input
-        as={ReactInputMask}
-        label="Telefone de contato"
-        {...register("contactPhoneNumber")}
-        isInvalid={!!formState.errors.contactPhoneNumber}
-        errorMessage={formState.errors?.contactPhoneNumber?.message?.toString()}
-        isDisabled={isDisabled}
-        mask="phoneNumber"
+      <Controller
+        control={control}
+        name="contactPhoneNumber"
+        render={({ field: { value }, formState: controllerFormState }) => (
+          <Input
+            as={ReactInputMask}
+            value={value}
+            label="Telefone de contato"
+            {...register("contactPhoneNumber")}
+            isInvalid={!!controllerFormState.errors.contactPhoneNumber}
+            errorMessage={controllerFormState.errors?.contactPhoneNumber?.message?.toString()}
+            isDisabled={isDisabled}
+            mask="phoneNumber"
+          />
+        )}
       />
 
       <Controller
