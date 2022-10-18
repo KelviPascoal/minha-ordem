@@ -1,34 +1,26 @@
 import {
   FormControl,
-  FormErrorMessage,
   FormLabel,
-  Input as ChakraInput,
-  InputProps as ChakraInputProps,
+  Select as ChakraSelect,
+  SelectProps as ChakraSelectProps,
 } from "@chakra-ui/react";
 import { forwardRef, ForwardRefRenderFunction } from "react";
 
-export type InputProps = {
+export type SelectProps = {
   name: string;
   label?: string;
   errorMessage?: string;
-  mask?: "zipCode" | "phoneNumber";
-} & ChakraInputProps;
+} & ChakraSelectProps;
 
-const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { name, label, isInvalid, errorMessage, mask, ...restProps },
+const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps> = (
+  { name, label, isInvalid, errorMessage, ...restProps },
   ref
 ) => {
-  const masks = {
-    phoneNumber: "(99) 9 9999 9999",
-    zipCode: "99 999 999",
-  };
-
   return (
     <>
       <FormControl isInvalid={isInvalid}>
         {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
-        <ChakraInput
-          mask={!!mask ? masks[mask] : undefined}
+        <ChakraSelect
           name={name}
           id={name}
           variant="filled"
@@ -41,10 +33,9 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           {...restProps}
           ref={ref}
         />
-        {errorMessage && <FormErrorMessage>{errorMessage}</FormErrorMessage>}
       </FormControl>
     </>
   );
 };
 
-export const Input = forwardRef(InputBase);
+export const Select = forwardRef(SelectBase);

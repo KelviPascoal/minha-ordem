@@ -16,13 +16,6 @@ export function CreateCustomersTemplate() {
   });
 
   function handleCreate(formData: any) {
-    // await new Promise((resolve) => {
-    //   setTimeout(() => {
-    //     resolve("");
-    //   }, 2000);
-    // });
-    // console.log("formData", formData);
-    // router.push("/custormes");
     console.log("formData", formData);
   }
 

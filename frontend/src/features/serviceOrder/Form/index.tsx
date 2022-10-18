@@ -1,14 +1,17 @@
 import { Flex, Grid, SimpleGrid } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useFormContext } from "react-hook-form";
-import { Yup } from "../../../utils/Yup";
+import { Controller, useFormContext } from "react-hook-form";
 import { Input } from "../../../components/form/Input";
+import { Select } from "../../../components/form/Select";
 import React from "react";
+import { Autocomplete } from "../../../components/form/Autocomplete";
+import { customersMock } from "../../../__mocks__/customers.mock";
+import { OptionProps } from "chakra-react-select";
 
 export type ServiceOrderFormData = {
   number: string;
   status: string;
-  customersName: string;
+  // customersName: string;
   customersId: string;
   serviceType: string;
   registerDate: string;
@@ -28,7 +31,7 @@ export function ServiceOrderForm({
 }: ServiceOrderFormProps) {
   const router = useRouter();
 
-  const { register, setValue, formState, control, trigger } = useFormContext();
+  const { register, setValue, formState, control } = useFormContext();
 
   const isDisabled = isFormDisabled || formState.isSubmitting;
 
@@ -37,7 +40,7 @@ export function ServiceOrderForm({
       setValue("number", initialValues.number);
       setValue("status", initialValues.status);
       setValue("customersId", initialValues.customersId);
-      setValue("customersName", initialValues.customersName);
+      // // setValue("customersName", initialValues.customersName);
       setValue("serviceType", initialValues.serviceType);
       setValue("registerDate", initialValues.registerDate);
       setValue("endDate", initialValues.endDate);
@@ -45,6 +48,20 @@ export function ServiceOrderForm({
       setValue("description", initialValues.description);
     }
   }, [initialValues, setValue]);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+  const [custumersOptions, setCustomersOptions] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    const options = customersMock.map((item) => ({
+      value: item.id,
+      label: item.name,
+    }));
+
+    setCustomersOptions(options);
+  }, []);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <>
@@ -54,6 +71,7 @@ export function ServiceOrderForm({
       >
         <Input
           label="Número"
+          mask="phoneNumber"
           {...register("number")}
           isInvalid={!!formState.errors.number}
           errorMessage={formState.errors?.number?.message?.toString()}
@@ -68,29 +86,54 @@ export function ServiceOrderForm({
         />
 
         <Flex>
-          <Input
-            label="Cliente"
-            {...register("customerName")}
-            isInvalid={!!formState.errors.customerName}
-            errorMessage={formState.errors?.customerName?.message?.toString()}
-            isDisabled={isDisabled}
+          <Controller
+            control={control}
+            name="customer"
+            render={({
+              field: { onChange, onBlur, value, name, ref },
+              formState,
+            }) => (
+              <Autocomplete
+                label="Cliente"
+                onChange={onChange}
+                onBlur={onBlur}
+                value={value}
+                placeholder="Cliente..."
+                options={custumersOptions}
+                name={name}
+                ref={ref}
+                isInvalid={!!formState.errors.customersId}
+                errorMessage={formState.errors?.customersId?.message?.toString()}
+                isDisabled={isDisabled}
+              />
+            )}
           />
-          <Input
-            label="Cliente"
-            {...register("customerId")}
-            isInvalid={!!formState.errors.customerId}
-            errorMessage={formState.errors?.customerId?.message?.toString()}
-            isDisabled={isDisabled}
-          />
+          {/* <Box position="absolute" display="none">
+            <Input
+              {...register("customerId")}
+              isInvalid={!!formState.errors.customerId}
+              errorMessage={formState.errors?.customerId?.message?.toString()}
+              isDisabled={isDisabled}
+            />
+          </Box> */}
         </Flex>
 
-        <Input
+        <Select
           label="Tipo serviço"
           {...register("serviceType")}
           isInvalid={!!formState.errors.serviceType}
-          errorMessage={formState.errors?.serviceType?.message?.toString()}
           isDisabled={isDisabled}
-        />
+        >
+          <option style={{ color: "black" }} value="computerMaintenance">
+            Manutenção de computador
+          </option>
+          <option style={{ color: "black" }} value="notebookMaintenance">
+            Manutenção de notebook
+          </option>
+          <option style={{ color: "black" }} value="mobileMaintenance">
+            Manutenção de mobile
+          </option>
+        </Select>
         <Input
           type="date"
           label="Data Cadastro"

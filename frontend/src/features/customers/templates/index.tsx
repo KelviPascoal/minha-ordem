@@ -82,11 +82,14 @@ export default function CustomersListTemplate() {
                           pathname: "customers/edit",
                           query: { id: customer.id },
                         }}
-                        // colorScheme="blue"
-                        // size="sm"
-                        // leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
                       >
-                        Editar
+                        <Button
+                          colorScheme="blue"
+                          size="sm"
+                          leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                        >
+                          Editar
+                        </Button>
                       </Link>
                     </Td>
                   )}
