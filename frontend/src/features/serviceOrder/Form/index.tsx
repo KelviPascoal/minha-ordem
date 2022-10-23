@@ -7,12 +7,13 @@ import React from "react";
 import { Autocomplete } from "../../../components/form/Autocomplete";
 import { customersMock } from "../../../__mocks__/customers.mock";
 import { OptionProps } from "chakra-react-select";
+import ReactInputMask from "react-input-mask";
 
 export type ServiceOrderFormData = {
   number: string;
   status: string;
-  // customersName: string;
-  customersId: string;
+  customerName: string;
+  customerId: string;
   serviceType: string;
   registerDate: string;
   endDate: string;
@@ -39,8 +40,8 @@ export function ServiceOrderForm({
     if (!!initialValues) {
       setValue("number", initialValues.number);
       setValue("status", initialValues.status);
-      setValue("customersId", initialValues.customersId);
-      // // setValue("customersName", initialValues.customersName);
+      setValue("customerId", initialValues.customerId);
+      setValue("customerName", initialValues.customerName);
       setValue("serviceType", initialValues.serviceType);
       setValue("registerDate", initialValues.registerDate);
       setValue("endDate", initialValues.endDate);
@@ -71,6 +72,7 @@ export function ServiceOrderForm({
       >
         <Input
           label="Número"
+          as={ReactInputMask}
           mask="phoneNumber"
           {...register("number")}
           isInvalid={!!formState.errors.number}
@@ -86,36 +88,19 @@ export function ServiceOrderForm({
         />
 
         <Flex>
-          <Controller
-            control={control}
-            name="customer"
-            render={({
-              field: { onChange, onBlur, value, name, ref },
-              formState,
-            }) => (
-              <Autocomplete
-                label="Cliente"
-                onChange={onChange}
-                onBlur={onBlur}
-                value={value}
-                placeholder="Cliente..."
-                options={custumersOptions}
-                name={name}
-                ref={ref}
-                isInvalid={!!formState.errors.customersId}
-                errorMessage={formState.errors?.customersId?.message?.toString()}
-                isDisabled={isDisabled}
-              />
-            )}
+          <Autocomplete
+            label="Cliente"
+            placeholder="Cliente..."
+            value={"aaa"}
+            options={custumersOptions}
+            isInvalid={!!formState.errors.customersId}
+            errorMessage={formState.errors?.customersId?.message?.toString()}
+            isDisabled={isDisabled}
+            onChange={(e) => {
+              setValue("customerId", e.value);
+              setValue("customerName", e.label);
+            }}
           />
-          {/* <Box position="absolute" display="none">
-            <Input
-              {...register("customerId")}
-              isInvalid={!!formState.errors.customerId}
-              errorMessage={formState.errors?.customerId?.message?.toString()}
-              isDisabled={isDisabled}
-            />
-          </Box> */}
         </Flex>
 
         <Select

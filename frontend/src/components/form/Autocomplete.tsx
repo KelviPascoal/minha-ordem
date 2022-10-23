@@ -1,12 +1,12 @@
 import React from "react";
 import { Select, OptionProps } from "chakra-react-select";
-
 export type AutocompleteProps = {
-  name: string;
+  // name: string;
+  onChange: (e: any) => void;
   label?: string;
   errorMessage?: string;
   options: OptionProps[];
-} & ChakraInputProps;
+} & Omit<ChakraInputProps, "onChange">;
 
 import {
   FormControl,
@@ -19,12 +19,12 @@ import { forwardRef, ForwardRefRenderFunction } from "react";
 const AutocompleteBase: ForwardRefRenderFunction<
   HTMLInputElement,
   AutocompleteProps
-> = ({ name, label, isInvalid, errorMessage, options }, ref) => {
+> = ({ label, isInvalid, errorMessage, options, value, onChange }, ref) => {
   return (
     <>
       <FormControl isInvalid={isInvalid}>
-        {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
-        <Select name={name} options={options} />
+        {!!label && <FormLabel>{label}</FormLabel>}
+        <Select options={options} onChange={onChange} />
         {errorMessage && <FormErrorMessage>{errorMessage}</FormErrorMessage>}
       </FormControl>
     </>

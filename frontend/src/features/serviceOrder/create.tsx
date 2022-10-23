@@ -1,4 +1,4 @@
-import { Box, Divider, Flex, Heading } from "@chakra-ui/react";
+import { Box, Button, Divider, Flex, Heading, HStack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from "react-hook-form";
@@ -6,6 +6,7 @@ import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
 import { ServiceOrderForm } from "./Form";
 import { formSchema } from "./Form/formSchema";
+import Link from "next/link";
 
 export function CreateServiceOrderTemplate() {
   const router = useRouter();
@@ -15,13 +16,13 @@ export function CreateServiceOrderTemplate() {
   });
 
   async function handleCreate(formData: any) {
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve("");
-      }, 2000);
-    });
+    // await new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve("");
+    //   }, 2000);
+    // });
     console.log("formData", formData);
-    router.push("/service-order");
+    // router.push("/service-order");
   }
 
   return (
@@ -42,8 +43,26 @@ export function CreateServiceOrderTemplate() {
             <Heading size="lg" fontWeight="normal">
               Editar Ordem de serviço
             </Heading>
-            <ServiceOrderForm />
             <Divider my="6" borderColor="gray.700" />
+
+            <ServiceOrderForm />
+
+            <Divider my="6" borderColor="gray.700" />
+
+            <Flex mt={["6", "8"]} justifyContent="flex-end" gap={4}>
+              <Link href="/service-order" passHref>
+                <Button as="a" colorScheme="whiteAlpha">
+                  Cancelar
+                </Button>
+              </Link>
+              <Button
+                type="submit"
+                colorScheme="blue"
+                isLoading={methods.formState.isSubmitting}
+              >
+                Salvar
+              </Button>
+            </Flex>
           </Box>
         </FormProvider>
       </Flex>
