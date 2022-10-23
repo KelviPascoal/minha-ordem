@@ -1,0 +1,77 @@
+{
+  "customers": [
+    {
+      "name": "Jhon Wick",
+      "email": "wick@hmail.com",
+      "address": "Travessa Antônio Ataíde",
+      "district": "Divino Espírito Santo",
+      "city": "Vila Velha",
+      "uf": "ES",
+      "phoneNumber": "(32) 1 3213 2132",
+      "contactPhoneNumber": "",
+      "zipCode": "29 107 185",
+      "id": "5a0FKFx"
+    },
+    {
+      "name": "Lee Sin",
+      "email": "lee_sin@test.com",
+      "address": "Travessa Antônio Ataíde",
+      "district": "Divino Espírito Santo",
+      "city": "Vila Velha",
+      "uf": "ES",
+      "phoneNumber": "99999999999",
+      "contactPhoneNumber": "",
+      "zipCode": "29 107 185",
+      "id": "4hEOwIR"
+    },
+    {
+      "name": "Erick Pascoal",
+      "email": "erickpascoal@teste.com",
+      "address": "Travessa rua antonio ataide",
+      "district": "Divino",
+      "city": "Vila velha",
+      "uf": "ES",
+      "phoneNumber": "27988846549",
+      "contactPhoneNumber": "27998465522",
+      "zipCode": "29107185",
+      "id": "nDW5-8S"
+    },
+    {
+      "name": "Kelvi Pascoal",
+      "email": "Kelvi@teste.com",
+      "address": "Travessa rua antonio ataide",
+      "district": "Divino",
+      "city": "Vila velha",
+      "uf": "ES",
+      "phoneNumber": "27993219875",
+      "contactPhoneNumber": "",
+      "zipCode": "29107185",
+      "id": "GaG0Gmw"
+    },
+    {
+      "name": "Seju Pascoal dos Santos",
+      "email": "seju@teste.com",
+      "address": "Travessa rua antonio ataide",
+      "district": "Divino",
+      "city": "Vila velha",
+      "uf": "ES",
+      "phoneNumber": "27999887777",
+      "contactPhoneNumber": "",
+      "zipCode": "29107185",
+      "id": "auU7Bbt"
+    },
+    {
+      "name": "aaaaaa",
+      "email": "wick@hmail.com",
+      "address": "Travessa Antônio Ataíde",
+      "district": "Divino Espírito Santo",
+      "city": "Vila Velha",
+      "uf": "ES",
+      "phoneNumber": "13213213213",
+      "contactPhoneNumber": "",
+      "zipCode": "29 107 185",
+      "id": "BIfFB-W"
+    }
+  ],
+  "service-order": []
+}
