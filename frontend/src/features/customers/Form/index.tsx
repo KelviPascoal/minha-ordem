@@ -58,8 +58,9 @@ export function CustomersForm({
       setValue("district", initialValues.district);
       setValue("city", initialValues.city);
       setValue("uf", initialValues.uf);
+      trigger();
     }
-  }, [initialValues, setValue]);
+  }, [initialValues, setValue, trigger]);
 
   const isDisabled = isFormDisabled || formState.isSubmitting;
 

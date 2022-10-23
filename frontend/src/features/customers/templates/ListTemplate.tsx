@@ -4,6 +4,7 @@ import {
   Flex,
   Heading,
   Icon,
+  Input,
   Table,
   Tbody,
   Td,
@@ -16,15 +17,34 @@ import {
 import Link from "next/link";
 import React from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
+import { HiOutlineTrash } from "react-icons/hi";
 import { Header } from "../../../components/Header";
 import { Sidebar } from "../../../components/Sidebar";
-import { customersMock } from "../../../__mocks__/customers.mock";
+import { customersService } from "../../../services/customers";
+import ReactInputMask from "react-input-mask";
 
 export default function CustomersListTemplate() {
+  const [customers, setCustomers] = React.useState<any[]>([]);
+
   const isWideScreen = useBreakpointValue({
     base: false,
     lg: true,
   });
+
+  const loadCustomers = async () => {
+    const response = await customersService.get();
+    setCustomers(response.data);
+  };
+
+  const deleteCustomer = async (id: string) => {
+    await customersService.delete(id);
+    const updatedCustomers = customers.filter((item) => item.id !== id);
+    setCustomers(updatedCustomers);
+  };
+
+  React.useEffect(() => {
+    loadCustomers();
+  }, []);
 
   return (
     <Box>
@@ -33,7 +53,7 @@ export default function CustomersListTemplate() {
       <Flex w="100%" maxWidth={1480} mx="auto" my="6" px={["2", "6"]}>
         <Sidebar />
 
-        <Box flex="1" bgColor="gray.800" padding="8" borderRadius={8}>
+        <Box flex="1" backgroundColor="gray.800" padding="8" borderRadius={8}>
           <Flex justify="space-between" align="center" mb="8">
             <Heading size="lg" fontWeight="normal">
               Clientes
@@ -62,7 +82,7 @@ export default function CustomersListTemplate() {
             </Thead>
 
             <Tbody>
-              {customersMock.map((customer, index) => (
+              {customers.map((customer, index) => (
                 <Tr key={index}>
                   <Td>
                     <Box>
@@ -74,23 +94,50 @@ export default function CustomersListTemplate() {
                       </Text>
                     </Box>
                   </Td>
-                  {isWideScreen && <Td> {customer.phoneNumber}</Td>}
                   {isWideScreen && (
                     <Td>
-                      <Link
-                        href={{
-                          pathname: "customers/edit",
-                          query: { id: customer.id },
+                      <Text
+                        as={ReactInputMask}
+                        mask={"(99) 9 9999 9999"}
+                        value={customer.phoneNumber}
+                        border="none"
+                        outline="0"
+                        boxShadow="0"
+                        _focus={{
+                          outline: "0",
+                          boxShadow: "0",
+                          border: "none",
                         }}
-                      >
-                        <Button
-                          colorScheme="blue"
-                          size="sm"
-                          leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                        backgroundColor="gray.800"
+                      />
+                    </Td>
+                  )}
+                  {isWideScreen && (
+                    <Td>
+                      <Flex gap="2">
+                        <Link
+                          href={{
+                            pathname: "customers/edit",
+                            query: { id: customer.id },
+                          }}
                         >
-                          Editar
+                          <Button
+                            colorScheme="blue"
+                            size="sm"
+                            leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                          >
+                            Editar
+                          </Button>
+                        </Link>
+                        <Button
+                          colorScheme="red"
+                          size="sm"
+                          onClick={() => deleteCustomer(customer.id)}
+                          leftIcon={<Icon as={HiOutlineTrash} fontSize="16" />}
+                        >
+                          Deletar
                         </Button>
-                      </Link>
+                      </Flex>
                     </Td>
                   )}
                 </Tr>

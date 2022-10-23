@@ -1,5 +1,5 @@
-import { EditCustomersTemplate } from "../../features/customers/templates/edit";
+import { CustomerFormTemplate } from "../../features/customers/templates/FormTemplate";
 
 export default function EditCustomers() {
-  return <EditCustomersTemplate />;
+  return <CustomerFormTemplate />;
 }

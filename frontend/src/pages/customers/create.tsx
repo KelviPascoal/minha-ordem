@@ -1,5 +1,5 @@
-import { CreateCustomersTemplate } from "../../features/customers/templates/create";
+import { CustomerFormTemplate } from "../../features/customers/templates/FormTemplate";
 
 export default function CreateCustomers() {
-  return <CreateCustomersTemplate />;
+  return <CustomerFormTemplate />;
 }
