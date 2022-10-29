@@ -59,18 +59,6 @@
       "contactPhoneNumber": "",
       "zipCode": "29107185",
       "id": "auU7Bbt"
-    },
-    {
-      "name": "aaaaaa",
-      "email": "wick@hmail.com",
-      "address": "Travessa Antônio Ataíde",
-      "district": "Divino Espírito Santo",
-      "city": "Vila Velha",
-      "uf": "ES",
-      "phoneNumber": "13213213213",
-      "contactPhoneNumber": "",
-      "zipCode": "29 107 185",
-      "id": "BIfFB-W"
     }
   ],
   "service-order": []
