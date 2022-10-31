@@ -22,7 +22,7 @@
     "react-apexcharts": "^1.3.9",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.22.5",
-    "react-icons": "^4.4.0",
+    "react-icons": "^4.6.0",
     "react-input-mask": "^2.0.4",
     "react-select": "^5.4.0",
     "viacep": "^1.0.0",

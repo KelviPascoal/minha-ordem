@@ -4,7 +4,11 @@ import {
   Flex,
   Heading,
   Icon,
-  Input,
+  IconButton,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
   Table,
   Tbody,
   Td,
@@ -24,10 +28,12 @@ import { Sidebar } from "../../../components/Sidebar";
 import { customersService } from "../../../services/customers";
 import ReactInputMask from "react-input-mask";
 import { Modal } from "../../../components/Modal";
+import { SlOptionsVertical } from "react-icons/sl";
 
 export default function CustomersListTemplate() {
   const [customers, setCustomers] = React.useState<any[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [customerIdSelected, setCustomerIdSelected] = React.useState("");
 
   const isWideScreen = useBreakpointValue({
     base: false,
@@ -51,9 +57,23 @@ export default function CustomersListTemplate() {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <div>deseja deletar este cadastro?</div>
-      </Modal>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        title="Deseja deletar este cadastro?"
+        description="Esta ação não pode ser desfeita!"
+        confirmButton={{
+          name: "Deletar",
+          onClick: () => deleteCustomer(customerIdSelected),
+        }}
+        cancelButton={{
+          name: "Cancelar",
+          onClick: () => {
+            setCustomerIdSelected("");
+            onClose();
+          },
+        }}
+      />
       <Box>
         <Header showSearch />
 
@@ -121,34 +141,59 @@ export default function CustomersListTemplate() {
                     )}
                     {isWideScreen && (
                       <Td>
-                        <Flex gap="2">
-                          <Link
-                            href={{
-                              pathname: "customers/edit",
-                              query: { id: customer.id },
-                            }}
-                          >
-                            <Button
-                              colorScheme="blue"
-                              size="sm"
-                              leftIcon={
-                                <Icon as={RiPencilLine} fontSize="16" />
-                              }
-                            >
-                              Editar
+                        <Popover>
+                          <PopoverTrigger>
+                            <Button size="xs">
+                              <IconButton
+                                as={SlOptionsVertical}
+                                aria-label="Abrir opções de ação"
+                              />
                             </Button>
-                          </Link>
-                          <Button
-                            colorScheme="red"
-                            size="sm"
-                            onClick={() => onOpen()}
-                            leftIcon={
-                              <Icon as={HiOutlineTrash} fontSize="16" />
-                            }
+                          </PopoverTrigger>
+                          <PopoverContent
+                            width="40"
+                            color="white"
+                            bg="blue.800"
+                            borderColor="blue.800"
+                            padding="1"
                           >
-                            Deletar
-                          </Button>
-                        </Flex>
+                            <PopoverBody>
+                              <Flex gap="2" flexDir="column">
+                                <Link
+                                  href={{
+                                    pathname: "customers/edit",
+                                    query: { id: customer.id },
+                                  }}
+                                >
+                                  <Button
+                                    // colorScheme="blue"
+                                    variant="ghost"
+                                    size="sm"
+                                    leftIcon={
+                                      <Icon as={RiPencilLine} fontSize="16" />
+                                    }
+                                  >
+                                    Editar
+                                  </Button>
+                                </Link>
+                                <Button
+                                  // colorScheme="red"
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => {
+                                    setCustomerIdSelected(customer.id);
+                                    onOpen();
+                                  }}
+                                  leftIcon={
+                                    <Icon as={HiOutlineTrash} fontSize="16" />
+                                  }
+                                >
+                                  Deletar
+                                </Button>
+                              </Flex>
+                            </PopoverBody>
+                          </PopoverContent>
+                        </Popover>
                       </Td>
                     )}
                   </Tr>
