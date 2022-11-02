@@ -1,14 +1,15 @@
 import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box,
   Button,
   Flex,
   Heading,
   Icon,
   IconButton,
-  Popover,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger,
   Table,
   Tbody,
   Td,
@@ -29,6 +30,7 @@ import { customersService } from "../../../services/customers";
 import ReactInputMask from "react-input-mask";
 import { Modal } from "../../../components/Modal";
 import { SlOptionsVertical } from "react-icons/sl";
+import { BsThreeDots } from "react-icons/bs";
 
 export default function CustomersListTemplate() {
   const [customers, setCustomers] = React.useState<any[]>([]);
@@ -141,59 +143,62 @@ export default function CustomersListTemplate() {
                     )}
                     {isWideScreen && (
                       <Td>
-                        <Popover>
-                          <PopoverTrigger>
-                            <Button size="xs">
-                              <IconButton
-                                as={SlOptionsVertical}
-                                aria-label="Abrir opções de ação"
-                              />
-                            </Button>
-                          </PopoverTrigger>
-                          <PopoverContent
-                            width="40"
-                            color="white"
-                            bg="blue.800"
-                            borderColor="blue.800"
-                            padding="1"
-                          >
-                            <PopoverBody>
-                              <Flex gap="2" flexDir="column">
-                                <Link
-                                  href={{
-                                    pathname: "customers/edit",
-                                    query: { id: customer.id },
-                                  }}
-                                >
+                        {!!customer.id && (
+                          <Accordion allowMultiple>
+                            <AccordionItem
+                              width="40"
+                              color="white"
+                              bg="blue.800"
+                              borderColor="blue.800"
+                              padding="1"
+                            >
+                              <AccordionButton>
+                                <AccordionIcon>
+                                  <IconButton
+                                    as={BsThreeDots}
+                                    aria-label="Abrir opções de ação"
+                                  />
+                                </AccordionIcon>
+                              </AccordionButton>
+
+                              <AccordionPanel>
+                                <Flex gap="2" flexDir="column">
+                                  <Link
+                                    href={{
+                                      pathname: "customers/edit",
+                                      query: { id: customer.id },
+                                    }}
+                                  >
+                                    <Button
+                                      // colorScheme="blue"
+                                      variant="ghost"
+                                      size="sm"
+                                      leftIcon={
+                                        <Icon as={RiPencilLine} fontSize="16" />
+                                      }
+                                    >
+                                      Editar
+                                    </Button>
+                                  </Link>
                                   <Button
-                                    // colorScheme="blue"
+                                    // colorScheme="red"
                                     variant="ghost"
                                     size="sm"
+                                    onClick={() => {
+                                      setCustomerIdSelected(customer.id);
+                                      onOpen();
+                                    }}
                                     leftIcon={
-                                      <Icon as={RiPencilLine} fontSize="16" />
+                                      <Icon as={HiOutlineTrash} fontSize="16" />
                                     }
                                   >
-                                    Editar
+                                    Deletar
                                   </Button>
-                                </Link>
-                                <Button
-                                  // colorScheme="red"
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() => {
-                                    setCustomerIdSelected(customer.id);
-                                    onOpen();
-                                  }}
-                                  leftIcon={
-                                    <Icon as={HiOutlineTrash} fontSize="16" />
-                                  }
-                                >
-                                  Deletar
-                                </Button>
-                              </Flex>
-                            </PopoverBody>
-                          </PopoverContent>
-                        </Popover>
+                                </Flex>
+                              </AccordionPanel>
+                            </AccordionItem>
+                          </Accordion>
+                        )}
                       </Td>
                     )}
                   </Tr>
