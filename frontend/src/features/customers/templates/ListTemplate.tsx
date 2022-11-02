@@ -1,15 +1,14 @@
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
   Box,
   Button,
   Flex,
   Heading,
   Icon,
   IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Table,
   Tbody,
   Td,
@@ -31,11 +30,15 @@ import ReactInputMask from "react-input-mask";
 import { Modal } from "../../../components/Modal";
 import { SlOptionsVertical } from "react-icons/sl";
 import { BsThreeDots } from "react-icons/bs";
+import { useRouter } from "next/router";
+import { MenuActions } from "../../../components/MenuActions";
 
 export default function CustomersListTemplate() {
   const [customers, setCustomers] = React.useState<any[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [customerIdSelected, setCustomerIdSelected] = React.useState("");
+
+  const router = useRouter();
 
   const isWideScreen = useBreakpointValue({
     base: false,
@@ -144,60 +147,26 @@ export default function CustomersListTemplate() {
                     {isWideScreen && (
                       <Td>
                         {!!customer.id && (
-                          <Accordion allowMultiple>
-                            <AccordionItem
-                              width="40"
-                              color="white"
-                              bg="blue.800"
-                              borderColor="blue.800"
-                              padding="1"
-                            >
-                              <AccordionButton>
-                                <AccordionIcon>
-                                  <IconButton
-                                    as={BsThreeDots}
-                                    aria-label="Abrir opções de ação"
-                                  />
-                                </AccordionIcon>
-                              </AccordionButton>
-
-                              <AccordionPanel>
-                                <Flex gap="2" flexDir="column">
-                                  <Link
-                                    href={{
-                                      pathname: "customers/edit",
-                                      query: { id: customer.id },
-                                    }}
-                                  >
-                                    <Button
-                                      // colorScheme="blue"
-                                      variant="ghost"
-                                      size="sm"
-                                      leftIcon={
-                                        <Icon as={RiPencilLine} fontSize="16" />
-                                      }
-                                    >
-                                      Editar
-                                    </Button>
-                                  </Link>
-                                  <Button
-                                    // colorScheme="red"
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => {
-                                      setCustomerIdSelected(customer.id);
-                                      onOpen();
-                                    }}
-                                    leftIcon={
-                                      <Icon as={HiOutlineTrash} fontSize="16" />
-                                    }
-                                  >
-                                    Deletar
-                                  </Button>
-                                </Flex>
-                              </AccordionPanel>
-                            </AccordionItem>
-                          </Accordion>
+                          <MenuActions
+                            options={[
+                              {
+                                icon: RiPencilLine,
+                                name: "Editar",
+                                onClick: () =>
+                                  router.push("customers/edit", {
+                                    query: customer.id,
+                                  }),
+                              },
+                              {
+                                icon: HiOutlineTrash,
+                                name: "Deletar",
+                                onClick: () => {
+                                  setCustomerIdSelected(customer.id);
+                                  onOpen();
+                                },
+                              },
+                            ]}
+                          />
                         )}
                       </Td>
                     )}
