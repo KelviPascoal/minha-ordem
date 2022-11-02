@@ -21,6 +21,8 @@ export function CustomerFormTemplate() {
     resolver: yupResolver(clientSchema),
   });
 
+  console.log("router.query.id", router.query.id);
+
   const handleSave = async (formData: any) => {
     if (router.query.id) {
       const customer = {

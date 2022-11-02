@@ -4,11 +4,6 @@ import {
   Flex,
   Heading,
   Icon,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
   Table,
   Tbody,
   Td,
@@ -28,8 +23,6 @@ import { Sidebar } from "../../../components/Sidebar";
 import { customersService } from "../../../services/customers";
 import ReactInputMask from "react-input-mask";
 import { Modal } from "../../../components/Modal";
-import { SlOptionsVertical } from "react-icons/sl";
-import { BsThreeDots } from "react-icons/bs";
 import { useRouter } from "next/router";
 import { MenuActions } from "../../../components/MenuActions";
 
@@ -153,8 +146,9 @@ export default function CustomersListTemplate() {
                                 icon: RiPencilLine,
                                 name: "Editar",
                                 onClick: () =>
-                                  router.push("customers/edit", {
-                                    query: customer.id,
+                                  router.push({
+                                    pathname: "customers/edit",
+                                    query: { id: customer.id },
                                   }),
                               },
                               {
