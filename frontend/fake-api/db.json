@@ -2,12 +2,12 @@
   "customers": [
     {
       "name": "Jhon Wick",
-      "email": "wick@hmail.com",
+      "email": "wick@hotmail.com",
       "address": "Travessa Antônio Ataíde",
       "district": "Divino Espírito Santo",
       "city": "Vila Velha",
       "uf": "ES",
-      "phoneNumber": "(32) 1 3213 2132",
+      "phoneNumber": "32992132132",
       "contactPhoneNumber": "",
       "zipCode": "29 107 185",
       "id": "5a0FKFx"
@@ -61,5 +61,22 @@
       "id": "auU7Bbt"
     }
   ],
-  "service-order": []
+  "service-order": [
+    {
+      "id": "df32g1df3",
+      "number": "001",
+      "status": "Orçamento",
+      "type": "Manutenção Mobile",
+      "description": "trocar tela de um Iphone pro max bla bla bla, e formatar",
+      "payment": {
+        "formOfPayment": "Credito",
+        "price": "500"
+      },
+      "customer": {
+        "id": "GaG0Gmw",
+        "name": "Kelvi Pascoal"
+      },
+      "endDate": "30/10/2022"
+    }
+  ]
 }

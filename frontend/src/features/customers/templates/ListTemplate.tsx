@@ -47,6 +47,7 @@ export default function CustomersListTemplate() {
     await customersService.delete(id);
     const updatedCustomers = customers.filter((item) => item.id !== id);
     setCustomers(updatedCustomers);
+    onClose();
   };
 
   React.useEffect(() => {

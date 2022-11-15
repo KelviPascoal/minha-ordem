@@ -13,9 +13,6 @@ export const customersService = {
     return await api.post(`${PATH}/`, data);
   },
   update: async (data: any, id: string) => {
-    console.log("🚀 ~ file: index.ts ~ line 16 ~ update: ~ id", id);
-    console.log("🚀 ~ file: index.ts ~ line 16 ~ update: ~ data", data);
-
     await api.put(`${PATH}/${id}`, data);
   },
 
