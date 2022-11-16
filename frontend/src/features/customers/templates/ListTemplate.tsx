@@ -26,8 +26,27 @@ import { Modal } from "../../../components/Modal";
 import { useRouter } from "next/router";
 import { MenuActions } from "../../../components/MenuActions";
 
-export default function CustomersListTemplate() {
-  const [customers, setCustomers] = React.useState<any[]>([]);
+export type Customer = {
+  name: string;
+  email: string;
+  address: string;
+  district: string;
+  city: string;
+  uf: string;
+  phoneNumber: string;
+  contactPhoneNumber: string;
+  zipCode: string;
+  id: string;
+};
+
+export type CustomersListTemplateProps = {
+  customers: Customer[];
+};
+
+export default function CustomersListTemplate({
+  customers,
+}: CustomersListTemplateProps) {
+  const [data, setData] = React.useState<Customer[]>(customers);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [customerIdSelected, setCustomerIdSelected] = React.useState("");
 
@@ -38,21 +57,12 @@ export default function CustomersListTemplate() {
     lg: true,
   });
 
-  const loadCustomers = async () => {
-    const response = await customersService.get();
-    setCustomers(response.data);
-  };
-
   const deleteCustomer = async (id: string) => {
     await customersService.delete(id);
     const updatedCustomers = customers.filter((item) => item.id !== id);
-    setCustomers(updatedCustomers);
+    setData(updatedCustomers);
     onClose();
   };
-
-  React.useEffect(() => {
-    loadCustomers();
-  }, []);
 
   return (
     <>
