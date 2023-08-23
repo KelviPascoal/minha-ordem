@@ -5,7 +5,7 @@ import { Input } from "../../../components/form/Input";
 import { Select } from "../../../components/form/Select";
 import React from "react";
 import { Autocomplete } from "../../../components/form/Autocomplete";
-import { customersMock } from "../../../__mocks__/customers.mock";
+import { customersMock } from "../../../__mocks__";
 import { OptionProps } from "chakra-react-select";
 import ReactInputMask from "react-input-mask";
 

@@ -21,7 +21,7 @@ export function SidebarNav() {
         <NavLink href="/customers" icon={RiContactsLine}>
           Clientes
         </NavLink>
-        <NavLink href="/service-type" icon={RiContactsLine}>
+        <NavLink href="#" icon={RiContactsLine}>
           Tipo de serviço
         </NavLink>
       </NavSection>
